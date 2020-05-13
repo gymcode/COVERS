@@ -10,46 +10,16 @@ import GetStarted from './screens/StartScreens/GetStarted'
 import Information from './screens/StartScreens/Information'
 import Verification from './screens/StartScreens/Verification'
 
+//tab imports 
+import HomeScreen from './screens/TabScreens/HomeScreen';
+import VitalsScreen from './screens/TabScreens/VitalsScreen';
+import ReportScreen from './screens/TabScreens/ReportScreen';
+import SettingsScreen from './screens/TabScreens/SettingsScreen';
+
 // components
 import TabBarIcon from './components/tabBarIcon'
-import Header from './components/header'
 
-const Home = ()=>{
-  return(
-    <View>
-    <Header>
-      <Text>gsdfgsfdgsgsf</Text>
-    </Header>
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-      <Text>Home</Text>
-    </View>
-    </View>
-  )
-}
 
-const Report = ()=>{
-  return(
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-      <Text>Reports</Text>
-    </View>
-  )
-}
-
-const Vitals = ()=>{
-  return(
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-      <Text>Vitals</Text>
-    </View>
-  )
-}
-
-const Settings = ()=>{
-  return(
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-      <Text>Settings</Text>
-    </View>
-  )
-}
 
 const Tab = createBottomTabNavigator();
 
@@ -61,28 +31,28 @@ const MainSectionTab = ()=>{
           inactiveTintColor: '#ccc',
         }}
     >
-      <Tab.Screen name="Home" component={Home}
+      <Tab.Screen name="Home" component={HomeScreen}
         options={{
           tabBarIcon: ({focused})=> (
             <TabBarIcon focused ={focused} name="md-home"/>
             )
         }}
       />
-      <Tab.Screen name="Report" component={Report} 
+      <Tab.Screen name="Report" component={ReportScreen} 
         options={{
           tabBarIcon: ({focused})=> (
             <TabBarIcon focused ={focused} name="ios-paper-plane"/>
             )
         }}
       />
-      <Tab.Screen name="Vitals" component={Vitals}
+      <Tab.Screen name="Vitals" component={VitalsScreen}
         options={{
           tabBarIcon: ({focused})=> (
             <TabBarIcon focused ={focused} name="ios-pulse"/>
             )
         }}
       />
-      <Tab.Screen name="Settings" component={Settings}
+      <Tab.Screen name="Settings" component={SettingsScreen}
         options={{
           tabBarIcon: ({focused})=> (
             <TabBarIcon focused ={focused} name="ios-settings"/>
