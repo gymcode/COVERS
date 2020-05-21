@@ -19,6 +19,16 @@ import SettingsScreen from './screens/TabScreens/SettingsScreen';
 // components
 import TabBarIcon from './components/tabBarIcon'
 
+//apollo stuff
+import { ApolloClient } from 'apollo-client'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { HttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+
+const client = new ApolloClient({
+  link: new HttpLink({uri: "https://covid19-graphql.netlify.app/"}), 
+  cache: new InMemoryCache()
+})
 
 
 const Tab = createBottomTabNavigator();
@@ -68,23 +78,25 @@ const Stack = createStackNavigator();
 
 export default function App(){
   return(
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="GetStarted" component={GetStarted} 
-        options={{headerShown: false}}
-        />
-        <Stack.Screen name="Verification" component={Verification} 
-        options={{headerShown: false}}
-        />
-        <Stack.Screen name="Information" component={Information} 
-        options={{ headerShown: false}}
-        />
-        <Stack.Screen name="Main" component={MainSectionTab} 
-          options={{
-            headerShown: false
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="GetStarted" component={GetStarted} 
+          options={{headerShown: false}}
+          />
+          <Stack.Screen name="Verification" component={Verification} 
+          options={{headerShown: false}}
+          />
+          <Stack.Screen name="Information" component={Information} 
+          options={{ headerShown: false}}
+          />
+          <Stack.Screen name="Main" component={MainSectionTab} 
+            options={{
+              headerShown: false
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ApolloProvider>
   )
 }
