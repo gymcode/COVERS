@@ -1,51 +1,62 @@
-import React, {useState} from 'react'; 
-import {View, Modal, Text, TouchableOpacity, TextInput, FlatList} from 'react-native'
+import React, {useState, useContext} from 'react'; 
+import {View, Modal, Text, TouchableOpacity, TextInput, FlatList, Image} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
-import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
+import {countryContext} from '../../App'
+import Lottie  from 'lottie-react-native'
+import load from '../../assets/loading/loading_2.json'
 
 //other imports
 import Country_1 from './countryData'
+import Country_2 from './countryData_2'
 
-
-const getCountryData = gql`
-
-query {
-    countries {
-        country
-        countryInfo {
-            _id
-            flag
-            iso3
-            iso2
-        }
-    }
-}
-
-`
-
-const ListItem = ({name, flag})=>{
-    return(
-      <View style={{flexDirection: "row",borderBottomWidth: .3, height: 50, borderBottomColor: "#e3e3e3"}}>
-         <View style={{flex:1, paddingVertical:17}}>
-            <Image source={flag} style={{width: 30, height: 20}}/>
-        </View>
-        <View style={{flex: 8, flexDirection: "row", paddingVertical: 17, marginLeft: 15}}>
-          <View>
-              <Text style={{fontSize: 15}}>{name}</Text>
-          </View>
-        </View>
-      </View>
-    )
-  }
+// graphql queries
+import {getCountryData} from '../../graphql/queries'
 
 
 export default function Account ({Visible, Close}){
 
     const [age, setAge] = useState("")
-    const [modal, setModal] = useState(false)
+    const [initialModal, setInitialmodal] = useState(false)
+    const [subModal, setSubmodal] = useState(false)
+    const [flag_1, setFlag_1] = useState( {
+        "country": "Ghana",
+        "countryInfo": {
+          "_id": "288",
+          "lat": 8,
+          "long": -2,
+          "flag": "https://disease.sh/assets/img/flags/gh.png"
+        }
+      })
+    const [flag_2, setFlag_2] = useState({
+        "country": "Ghana",
+        "countryInfo": {
+          "_id": "288",
+          "lat": 8,
+          "long": -2,
+          "flag": "https://disease.sh/assets/img/flags/gh.png"
+        }
+      })
     const {loading, error, data} = useQuery(getCountryData)
+    const {editedItem} = useContext(countryContext)
  
+    
+    // declaring of all functions 
+    function closeCountry_1(){
+        setInitialmodal(!initialModal)
+    }
+
+    function closeSubModal(){
+        setSubmodal(!subModal)
+    }
+
+    // const listdata = data.countries
+
+    // listdata.map((hello)=>{
+    //     console.log(hello.countryInfo._id)
+    // })
+
+    console.log(editedItem)
 
     return(
         <Modal visible={Visible} animationType="slide" presentationStyle={"pageSheet"} style={{borderRaduis: 10}}>
@@ -53,7 +64,7 @@ export default function Account ({Visible, Close}){
             {
                 loading ?
                 <View style={{flex: 1, justifyContent: "center", alignItems: 'center',}}>
-                    <Text>hello</Text>
+                    <Lottie source={load} autoPlay style={{width: 150}}/>
                 </View> 
                 : 
                 <View style={{padding: 20}}>
@@ -88,7 +99,31 @@ export default function Account ({Visible, Close}){
                             />
                         </View>
 
-                        {/* checkboxes */}
+                        {/* RadioButtons */}
+                         <View style={{flexDirection: "row"}}>
+                             <View style={{flexDirection: "row"}}>
+                                <View>
+                                    <Ionicons
+                                     name="ios-checkmark-circle"
+                                     size={25}
+                                    />
+                                </View>                                
+                                <View style={{paddingHorizontal: 8, alignItems: "center", justifyContent: "center"}}>
+                                    <Text>Female</Text>
+                                </View>                                
+                             </View>
+                             <View style={{flexDirection: "row", paddingHorizontal: 30}}>
+                                <View>
+                                    <Ionicons
+                                     name="ios-checkmark-circle"
+                                     size={25}
+                                    />
+                                </View>    
+                                <View style={{paddingHorizontal: 8, alignItems: "center", justifyContent: "center"}}>
+                                    <Text>Male</Text>
+                                </View>                                
+                             </View>
+                         </View>
 
                         {/* travelhistory */}
                         <View style={{marginVertical: 20}}>
@@ -98,17 +133,23 @@ export default function Account ({Visible, Close}){
                             </View>
                             <View style={{marginTop: 25, flexDirection: "row"}}>
                                 <View style={{flex: 8, height: 80,borderWidth: 1, borderColor: "#aaa",  borderRadius: 5,paddingHorizontal: 10, justifyContent: "center", alignItems: "center"}}>
-                                    <TouchableOpacity>
-                                        <Text>fsdfdfdf</Text>
+                                    <TouchableOpacity onPress={()=>{setInitialmodal(!initialModal)}}>
+                                       <Image source={{uri: flag_1.countryInfo.flag}} style={{height: 20, width: 30}} />
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{flex: 1}}/>
                                 <View style={{flex: 8, height: 80,borderWidth: 1, borderColor: "#aaa", borderRadius: 5 ,paddingHorizontal: 10, justifyContent: "center", alignItems: "center"}}>
-                                    <TouchableOpacity>
-                                        <Text>dfdsfsd</Text>
+                                    <TouchableOpacity onPress={()=>{setInitialmodal(!initialModal)}}>
+                                        <Image source={{uri: flag_2.countryInfo.flag}} style={{height: 20, width: 30}} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
+
+                            {/* travel History modals  */}
+                            <Country_1  Visible={initialModal} close={()=>{closeCountry_1()}}/>
+
+                            <Country_2 Visible={subModal} close={()=>{closeSubModal()}}/>
+
 
                             <View style={{marginVertical: 20}}>
                                 <Text style={{fontWeight: "bold"}}>Medical Professional Information</Text>

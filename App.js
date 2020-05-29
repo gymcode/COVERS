@@ -12,8 +12,8 @@ import Verification from './screens/StartScreens/Verification'
 
 //tab imports 
 import HomeScreen from './screens/TabScreens/HomeScreen';
-import VitalsScreen from './screens/TabScreens/VitalsScreen';
-import ReportScreen from './screens/TabScreens/ReportScreen';
+import VitalsScreen from './screens/TabScreens/Vitals/VitalsScreen';
+import ReportScreen from './screens/TabScreens/Report/ReportScreen';
 import SettingsScreen from './screens/TabScreens/SettingsScreen';
 
 // components
@@ -74,29 +74,44 @@ const MainSectionTab = ()=>{
 }
 
 
+
 const Stack = createStackNavigator();
 
+export const countryContext = React.createContext({})
+
 export default function App(){
+  const [editedItem, setEditedItem] = React.useState(0)
+
+  function setState(item){
+    setEditedItem(item)
+  }
+
+  function handleItem(editedItem){
+    console.log(editedItem)
+  }
+
   return(
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="GetStarted" component={GetStarted} 
-          options={{headerShown: false}}
-          />
-          <Stack.Screen name="Verification" component={Verification} 
-          options={{headerShown: false}}
-          />
-          <Stack.Screen name="Information" component={Information} 
-          options={{ headerShown: false}}
-          />
-          <Stack.Screen name="Main" component={MainSectionTab} 
-            options={{
-              headerShown: false
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <countryContext.Provider value={{editedItem, handleItem, setState}}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="GetStarted" component={GetStarted} 
+            options={{headerShown: false}}
+            />
+            <Stack.Screen name="Verification" component={Verification} 
+            options={{headerShown: false}}
+            />
+            <Stack.Screen name="Information" component={Information} 
+            options={{ headerShown: false}}
+            />
+            <Stack.Screen name="Main" component={MainSectionTab} 
+              options={{
+                headerShown: false
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+        </countryContext.Provider>
     </ApolloProvider>
   )
 }

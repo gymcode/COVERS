@@ -5,6 +5,7 @@ import Header from '../../components/header'
 import Hr from '../../components/Hr'
 
 
+
 export default function Home(){
     return(
         <View style={{flex: 1, backgroundColor: "#fff"}}>
