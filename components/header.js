@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, TouchableOpacity, Modal} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity, Modal, Image} from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
 
 // subcomponents
@@ -26,7 +26,7 @@ export default function Header(props){
                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                        <TouchableOpacity onPress={()=>{setOpenAccount(!openAccount)}}>
                             <View>
-                                <Text>dfdsfsfdf</Text>
+                                <Image source={require("../assets/man.png")} style={{height: 30, width: 30}}/>
                             </View>
                        </TouchableOpacity>
 
