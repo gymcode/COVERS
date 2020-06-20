@@ -8,36 +8,24 @@ import {
 import {Ionicons} from '@expo/vector-icons'
 import {AccordionList} from 'accordion-collapse-react-native'
 
-import LogSymptoms from '../../../components/vitalComponents/logSymptoms'
+import {FAQData} from '../../../Data/data'
 
-const data = [
-    {
-      id:1,
-      title: 'Getting Started',
-      body: 'React native Accordion/Collapse component, very good to use in toggles & show/hide content'
-    },
-    {
-      id:2,
-      title: 'Components',
-      body: 'AccordionList,Collapse,CollapseHeader & CollapseBody'
-    }
-]
 
 export default function FAQs({Visible, Close}){
-    const [details, setDetails] = React.useState(data)
+    const [details, setDetails] = React.useState(FAQData)
 
     function head(item){
         return(
-         <View style={{padding:10}}>
-            <Text style={{color: "#000"}}>{item.title}</Text>
+         <View style={{paddingVertical:20, padding: 8}}>
+            <Text style={{color: "#000", fontWeight: "bold"}}>{item.title}</Text>
           </View>
         )
     }
 
     function body(item){
         return(
-            <View style={{padding:10}}>
-             <Text style={{textAlign:'center'}}>{item.body}</Text>
+            <View style={{padding:1}}>
+                 <Text style={{}}>{item.content}</Text>
             </View>
         )
     }
