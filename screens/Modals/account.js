@@ -50,13 +50,15 @@ export default function Account ({Visible, Close}){
         setSubmodal(!subModal)
     }
 
-    // const listdata = data.countries
+    function selectedData(data){
+        console.log(data)
+        setFlag_1({...data})
+    }
 
-    // listdata.map((hello)=>{
-    //     console.log(hello.countryInfo._id)
-    // })
-
-    console.log(editedItem)
+    function selectedData2(data){
+        console.log(data)
+        setFlag_2({...data})
+    }
 
     return(
         <Modal visible={Visible} animationType="slide" presentationStyle={"pageSheet"} style={{borderRaduis: 10}}>
@@ -139,16 +141,16 @@ export default function Account ({Visible, Close}){
                                 </View>
                                 <View style={{flex: 1}}/>
                                 <View style={{flex: 8, height: 80,borderWidth: 1, borderColor: "#aaa", borderRadius: 5 ,paddingHorizontal: 10, justifyContent: "center", alignItems: "center"}}>
-                                    <TouchableOpacity onPress={()=>{setInitialmodal(!initialModal)}}>
+                                    <TouchableOpacity onPress={()=>{setSubmodal(!subModal)}}>
                                         <Image source={{uri: flag_2.countryInfo.flag}} style={{height: 20, width: 30}} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
 
                             {/* travel History modals  */}
-                            <Country_1  Visible={initialModal} close={()=>{closeCountry_1()}}/>
+                            <Country_1  Visible={initialModal} SelectedTeam={selectedData} close={()=>{closeCountry_1()}}/>
 
-                            <Country_2 Visible={subModal} close={()=>{closeSubModal()}}/>
+                            <Country_2 Visible={subModal} selectedCountry={selectedData2} close={()=>{closeSubModal()}}/>
 
 
                             <View style={{marginVertical: 20}}>

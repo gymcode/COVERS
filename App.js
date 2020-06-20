@@ -78,9 +78,11 @@ const MainSectionTab = ()=>{
 const Stack = createStackNavigator();
 
 export const countryContext = React.createContext({})
+export const reportContext = React.createContext({})
 
 export default function App(){
   const [editedItem, setEditedItem] = React.useState(0)
+  
 
   function setState(item){
     setEditedItem(item)

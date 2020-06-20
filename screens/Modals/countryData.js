@@ -18,9 +18,9 @@ import {countryContext} from '../../App'
 import {getCountryData} from '../../graphql/queries'
 
 
-const ListItem = ({name, flag, select})=>{
+const ListItem = ({name, flag, select, data})=>{
     return(
-    <TouchableOpacity onPress={select}>
+    <TouchableOpacity onPress={()=>{select(data)}}>
         <View style={{flexDirection: "row",borderBottomWidth: .3, height: 50, borderBottomColor: "#e3e3e3"}}>
             <View style={{flex:1, paddingVertical:17}}>
                 <Image source={flag} style={{width: 30, height: 20}}/>
@@ -36,7 +36,7 @@ const ListItem = ({name, flag, select})=>{
   }
 
 
-export default function Country({Visible, close}){
+export default function Country({Visible, close, SelectedTeam}){
     const {loading, error, data} = useQuery(getCountryData)
     const {editedItem, handleItem, setState} = React.useContext(countryContext)
     const listData = data.countries
@@ -59,7 +59,10 @@ export default function Country({Visible, close}){
                     <ScrollView style={{padding: 10, }}>
                      <FlatList
                             data={listData}
-                            renderItem={({item})=> <ListItem name={item.country} flag={{uri: item.countryInfo.flag}} select={setState (item.countryInfo._id)}/>}
+                            renderItem={({item})=> <ListItem {...item} data={item} name={item.country} flag={{uri: item.countryInfo.flag}} select={data=>{
+                                SelectedTeam({...data})
+                                close()
+                            }}/>}
                         />  
                     </ScrollView>
 

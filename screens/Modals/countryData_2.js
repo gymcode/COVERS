@@ -30,9 +30,9 @@ query {
 
 `
 
-const ListItem = ({name, flag})=>{
+const ListItem = ({name, flag, select, data})=>{
     return(
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>{select(data)}}>
         <View style={{flexDirection: "row",borderBottomWidth: .3, height: 50, borderBottomColor: "#e3e3e3"}}>
             <View style={{flex:1, paddingVertical:17}}>
                 <Image source={flag} style={{width: 30, height: 20}}/>
@@ -50,7 +50,7 @@ const ListItem = ({name, flag})=>{
 
 
 
-export default function Country_2({Visible, close}){
+export default function Country_2({Visible, close, selectedCountry}){
     const {loading, error, data} = useQuery(getCountryData)
     const listData = data.countries
 
@@ -72,7 +72,12 @@ export default function Country_2({Visible, close}){
                      <FlatList
                             keyExtractor = {(item)=> item.id}
                             data={listData}
-                            renderItem={({item})=> <ListItem name={item.country} flag={{uri: item.countryInfo.flag}}/>}
+                            renderItem={({item})=> <ListItem {...item} data={item} name={item.country} flag={{uri: item.countryInfo.flag}}
+                                select={data => {selectedCountry({...data})
+                                close()
+                            }}
+                                
+                            />}
                         />  
                     </ScrollView>
 
