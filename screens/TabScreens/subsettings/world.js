@@ -16,7 +16,7 @@ export default function World({Visible, Close}){
     const [content, setContent] = React.useState(null)
     const [loading, setLoading] = React.useState(true)
     const [loading2, setLoading2] = React.useState(true)
-    const [] = React.useState()
+    const [worldModal, setWorldModal] = React.useState(false)
     const [iniCountry, setIniCountry] = React.useState({
         "country": "Algeria",
         "countryInfo": {
@@ -34,6 +34,15 @@ export default function World({Visible, Close}){
           "tests": 0
         }
       })
+
+    function CloseModal(){
+        setWorldModal(!worldModal)
+    }
+
+    function selectedData2(data){
+        console.log(data)
+        setIniCountry({...data})
+    }
     
 
     React.useEffect(()=>{  
@@ -192,7 +201,7 @@ export default function World({Visible, Close}){
                      {/* select country section */}
                 <View style={styles.select_country}>
                     <Text>Select country:</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWorldModal(!worldModal)}}>
                         <View style={styles.options}>
 
                             <View style={{ flexDirection: "row"}}>
@@ -213,7 +222,58 @@ export default function World({Visible, Close}){
 
                         </View>
                     </TouchableOpacity>
+                    <WorldData Visible={worldModal} SelectedCountry={selectedData2} close={()=>{CloseModal()}}/>
                 </View>
+                {/* statistics for specific countries */}
+            <View style={styles.statistic}>
+                    <View style={{flexDirection: "row"}}>
+                            <View style={{flex:1}}>
+                               <Ionicons
+                               name="ios-stats"
+                               size={30}
+                               color="#7aeb7a"
+                               />
+                            </View>
+                            <View style={{flex:7, marginTop: 5}}>
+                                <Text style={{ fontSize: 20}}>Statistics</Text>
+                            </View>
+                    </View>
+
+                <View style={{flexDirection: "row", marginTop: 17}}>
+                   <View style={{flexDirection: "column", flex:2, borderRightWidth: .3, borderRightColor: "#e3e3e3"}}>
+                       <View>
+                            <Text style={{color: "#800080", fontSize: 16}}>Confirmed</Text>
+                            <Text>{iniCountry.result.cases}</Text>
+                       </View>
+                       <View style={{marginTop: 20}}>
+                            <Text style={{color: "yellow", fontSize: 16}}>Active</Text>
+                            <Text>{iniCountry.result.active}</Text>
+                       </View>
+                   </View>
+                   <View style={{flexDirection: "column", flex:2, marginLeft: 10,  borderRightWidth: .3, borderRightColor: "#e3e3e3"}}>
+                       <View>
+                            <Text style={{color: "green", fontSize: 16}}>Recovered</Text>
+                            <Text>{iniCountry.result.recovered}</Text>
+                       </View>
+                       <View style={{marginTop: 20}}>
+                            <Text style={{color: "red", fontSize: 16}}>Critical</Text>
+                            <Text>{iniCountry.result.critical}</Text>
+                       </View>
+                   </View>
+                   <View style={{flexDirection: "column",flex:2, marginLeft: 10}}>
+                       <View>
+                            <Text style={{color: "red", fontSize: 16}}>Deaths</Text>
+                            <Text>{iniCountry.result.deaths}</Text>
+                       </View>
+                       <View style={{marginTop: 20}}>
+                            <Text style={{color: "#b300b3", fontSize: 16}}>Tests</Text>
+                            <Text>{iniCountry.result.tests}</Text>
+                       </View>
+                   </View>
+                </View>
+
+            </View>
+
 
                 </View>
             </View>

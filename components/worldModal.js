@@ -30,7 +30,7 @@ const ListItem = ({name, flag, select, data})=>{
   }
 
 
-export default function WorldData({Visible, close, SelectedTeam}){
+export default function WorldData({Visible, close, SelectedCountry}){
   
     const [data, setData] = React.useState(null)
     const [loading, setLoading] = React.useState(true)
@@ -54,13 +54,21 @@ export default function WorldData({Visible, close, SelectedTeam}){
                                     iso3
                                     iso2
                                 }
+                                result{
+                                  cases
+                                  critical
+                                  deaths
+                                  recovered
+                                  active
+                                  tests
+                                }
                             }
                         }
                     `
                     })
                 })
                 let json = await response.json();
-                console.log(json.data.countries)
+               
                 setData(json.data.countries)
                 setLoading(!loading)
            }
@@ -91,7 +99,7 @@ export default function WorldData({Visible, close, SelectedTeam}){
                         <FlatList
                                 data={data}
                                 renderItem={({item})=> <ListItem {...item} data={item} name={item.country} flag={{uri: item.countryInfo.flag}} select={data=>{
-                                    SelectedTeam({...data})
+                                    SelectedCountry({...data})
                                     close()
                                 }}/>}
                             />  
