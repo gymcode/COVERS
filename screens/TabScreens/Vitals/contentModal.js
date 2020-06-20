@@ -17,7 +17,7 @@ export default function ContentModal({Visible, Close}){
 
                 <View style={{flexDirection: "row", justifyContent: 'space-between'}}> 
                     <View>
-                        <Text style={{}} style={{fontSize: 35, fontWeight: "bold"}}>Log Symptoms</Text>
+                        <Text style={{fontSize: 35, fontWeight: "bold"}}>Log Symptoms</Text>
                     </View>
                     <TouchableOpacity onPress={Close}>
                         <View>

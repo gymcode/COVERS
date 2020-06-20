@@ -10,13 +10,8 @@ import {
 } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {EvilIcons} from '@expo/vector-icons'
-import {useQuery} from '@apollo/react-hooks'
-import {countryContext} from '../../App'
-
-
-// graphql queries
-import {getCountryData} from '../../graphql/queries'
-
+import Lottie  from 'lottie-react-native'
+import load from '../../assets/loading/loading_2.json'
 
 const ListItem = ({name, flag, select, data})=>{
     return(
@@ -37,36 +32,75 @@ const ListItem = ({name, flag, select, data})=>{
 
 
 export default function Country({Visible, close, SelectedTeam}){
-    const {loading, error, data} = useQuery(getCountryData)
-    const {editedItem, handleItem, setState} = React.useContext(countryContext)
-    const listData = data.countries
+  
+    const [data, setData] = React.useState(null)
+    const [loading, setLoading] = React.useState(true)
 
+    React.useEffect(()=>{  
+        async function fetchData(){
+            let response = await fetch('https://covid19-graphql.netlify.app/', 
+            {   method: 'POST', 
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    query: `
+                       query  {
+                            countries {
+                                country
+                                countryInfo {
+                                    _id
+                                    flag
+                                    iso3
+                                    iso2
+                                }
+                            }
+                        }
+                    `
+                    })
+                })
+                let json = await response.json();
+                console.log(json.data.countries)
+                setData(json.data.countries)
+                setLoading(!loading)
+           }
+           fetchData()
+    }, [])
 
     return(
         <SafeAreaView>
             <Modal visible={Visible} animationType="slide">
-                <View style={{marginTop: 30, flex: 1}}>
+                {
+                    loading ?
+                    <View style={{flex: 1, justifyContent: "center", alignItems: 'center',}}>
+                        <Lottie source={load} autoPlay style={{width: 150}}/>
+                    </View> 
+                    :
+                    <View style={{marginTop: 30, flex: 1}}>
 
-                    <TouchableOpacity onPress={close}>
-                        <View style={{margin: 15, paddingHorizontal: 10}}>
-                            <EvilIcons
-                                name="close"
-                                size={20}
-                            />
-                        </View>
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={close}>
+                            <View style={{margin: 15, paddingHorizontal: 10}}>
+                                <EvilIcons
+                                    name="close"
+                                    size={20}
+                                />
+                            </View>
+                        </TouchableOpacity>
 
-                    <ScrollView style={{padding: 10, }}>
-                     <FlatList
-                            data={listData}
-                            renderItem={({item})=> <ListItem {...item} data={item} name={item.country} flag={{uri: item.countryInfo.flag}} select={data=>{
-                                SelectedTeam({...data})
-                                close()
-                            }}/>}
-                        />  
-                    </ScrollView>
+                        <ScrollView style={{padding: 10, }}>
+                        <FlatList
+                                data={data}
+                                renderItem={({item})=> <ListItem {...item} data={item} name={item.country} flag={{uri: item.countryInfo.flag}} select={data=>{
+                                    SelectedTeam({...data})
+                                    close()
+                                }}/>}
+                            />  
+                        </ScrollView>
 
-                </View>
+                    </View>     
+                }
+               
             </Modal>
         </SafeAreaView>
     )

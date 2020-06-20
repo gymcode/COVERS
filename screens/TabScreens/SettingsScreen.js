@@ -6,11 +6,13 @@ import Header from '../../components/header'
 import FAQs from './subsettings/FAQs'
 import Assessment from './subsettings/Assessment'
 import TestingScreen from './subsettings/Testing'
+import World from './subsettings/world'
 
 export default function Settings(){
   const [FaqModal, setFaqModal] = React.useState(false)
   const [AssessModal, setAssessModal] = React.useState(false)
   const [Testing, setTesting] = React.useState(false)
+  const [worldStat, setWorld] = React.useState(false)
 
   function CloseModal(){
     setFaqModal(false)
@@ -22,6 +24,10 @@ export default function Settings(){
 
   function CloseTesting(){
     setTesting(!Testing)
+  }
+
+  function CloseWorld(){
+    setWorld(!worldStat)
   }
     return(
         <View style={{flex: 1, backgroundColor: "#fff"}}>
@@ -101,6 +107,24 @@ export default function Settings(){
                     </View>
                   </TouchableOpacity>
                 </View>
+
+                <View style={{borderBottomWidth: .3, borderColor: "#ccc"}}>
+                  <TouchableOpacity onPress={()=>{setWorld(!worldStat)}}>
+                    <View style={{padding: 20, flexDirection: "row"}}>
+                      <View style={{flex: 7}}>
+                        <Text style={{fontWeight: "bold", fontSize: 17}}>WorldWIde Statistics</Text>
+                        <Text style={{fontSize: 13}}>Check out the worldwide Statisticsof every country</Text>
+                      </View>
+                      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+                        <Ionicons
+                          name="ios-arrow-forward"
+                          size= {20}
+                        />
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+                <World Visible={worldStat} Close={()=>{CloseWorld()}}/>
 
                 <View style={{borderBottomWidth: .3, borderColor: "#ccc"}}>
                   <TouchableOpacity>

@@ -3,10 +3,10 @@ import {
     View,
     Text,
     Modal, 
-    SafeAreaView,
     ScrollView,
-    Image, 
-    FlatList
+    SafeAreaView, 
+    FlatList, 
+    Image
 } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {EvilIcons} from '@expo/vector-icons'
@@ -14,7 +14,7 @@ import {EvilIcons} from '@expo/vector-icons'
 
 const ListItem = ({name, flag, select, data})=>{
     return(
-      <TouchableOpacity onPress={()=>{select(data)}}>
+    <TouchableOpacity onPress={()=>{select(data)}}>
         <View style={{flexDirection: "row",borderBottomWidth: .3, height: 50, borderBottomColor: "#e3e3e3"}}>
             <View style={{flex:1, paddingVertical:17}}>
                 <Image source={flag} style={{width: 30, height: 20}}/>
@@ -30,9 +30,8 @@ const ListItem = ({name, flag, select, data})=>{
   }
 
 
-
-
-export default function Country_2({Visible, close, selectedCountry}){
+export default function WorldData({Visible, close, SelectedTeam}){
+  
     const [data, setData] = React.useState(null)
     const [loading, setLoading] = React.useState(true)
 
@@ -71,31 +70,36 @@ export default function Country_2({Visible, close, selectedCountry}){
     return(
         <SafeAreaView>
             <Modal visible={Visible} animationType="slide">
-                <View style={{marginTop: 30, flex: 1}}>
+                {
+                    loading ?
+                    <View style={{flex: 1, justifyContent: "center", alignItems: 'center',}}>
+                        <Text>hello</Text>
+                    </View> 
+                    :
+                    <View style={{marginTop: 30, flex: 1}}>
 
-                    <TouchableOpacity onPress={close}>
-                        <View style={{margin: 15, paddingHorizontal: 10}}>
-                            <EvilIcons
-                                name="close"
-                                size={20}
-                            />
-                        </View>
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={close}>
+                            <View style={{margin: 15, paddingHorizontal: 10}}>
+                                <EvilIcons
+                                    name="close"
+                                    size={20}
+                                />
+                            </View>
+                        </TouchableOpacity>
 
-                    <ScrollView style={{padding: 10, }}>
-                     <FlatList
-                            keyExtractor = {(item)=> item.id}
-                            data={data}
-                            renderItem={({item})=> <ListItem {...item} data={item} name={item.country} flag={{uri: item.countryInfo.flag}}
-                                select={data => {selectedCountry({...data})
-                                close()
-                            }}
-                                
-                            />}
-                        />  
-                    </ScrollView>
+                        <ScrollView style={{padding: 10, }}>
+                        <FlatList
+                                data={data}
+                                renderItem={({item})=> <ListItem {...item} data={item} name={item.country} flag={{uri: item.countryInfo.flag}} select={data=>{
+                                    SelectedTeam({...data})
+                                    close()
+                                }}/>}
+                            />  
+                        </ScrollView>
 
-                </View>
+                    </View>     
+                }
+               
             </Modal>
         </SafeAreaView>
     )

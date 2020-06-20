@@ -22,16 +22,18 @@ export default function Vitals(){
               <Text>Vitals</Text>
           </Header>
           <View style={{justifyContent: "center", alignItems: "center"}}>
-              <Lottie source={load} autoPlay loop style={{width: 80, height: 250, marginLeft: 25}}/>
+              <Lottie source={load} autoPlay loop style={{width: 70, height: 140, marginLeft: 25, marginVertical: 15}}/>
 
-              <View>
-                <Text>You have not logged your vitals yet...</Text>
-              </View>
-              <TouchableOpacity onPress={()=>{setModal(!modal)}}>
-                <View style={{marginVertical: 25, borderWidth: 1, padding: 20, width: 150, justifyContent: "center", alignItems: "center", borderStyle: "dashed"}}>
-                  <Text>Log Vitals</Text>
+              <View style={{marginTop: 55, justifyContent: "center", alignItems: "center"}}>
+                <View>
+                  <Text>You have not logged your vitals yet...</Text>
                 </View>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setModal(!modal)}}>
+                  <View style={{marginVertical: 25, borderWidth: 1, padding: 20, width: 150, justifyContent: "center", alignItems: "center", borderStyle: "dashed"}}>
+                    <Text>Log Vitals</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
 
               <ContentModal Visible={modal} Close={()=>{CloseModal()}}/>
           </View>

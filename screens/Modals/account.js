@@ -13,6 +13,15 @@ import Country_2 from './countryData_2'
 // graphql queries
 import {getCountryData} from '../../graphql/queries'
 
+//fetching using the fetch method
+// function getcountryApi(){
+//      return fetch('https://signalc.herokuapp.com/GraphQL')
+//      .then((response)=>response.json())
+//      .then((data)=>{
+//         console.log(data)
+//      })
+// }
+
 
 export default function Account ({Visible, Close}){
 
