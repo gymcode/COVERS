@@ -10,18 +10,6 @@ import load from '../../assets/loading/loading_2.json'
 import Country_1 from './countryData'
 import Country_2 from './countryData_2'
 
-// graphql queries
-import {getCountryData} from '../../graphql/queries'
-
-//fetching using the fetch method
-// function getcountryApi(){
-//      return fetch('https://signalc.herokuapp.com/GraphQL')
-//      .then((response)=>response.json())
-//      .then((data)=>{
-//         console.log(data)
-//      })
-// }
-
 
 export default function Account ({Visible, Close}){
 
@@ -46,9 +34,40 @@ export default function Account ({Visible, Close}){
           "flag": "https://disease.sh/assets/img/flags/gh.png"
         }
       })
-    const {loading, error, data} = useQuery(getCountryData)
-    const {editedItem} = useContext(countryContext)
+      const [loading, setLoading] = useState(true)
+      const [data, setData] = useState(null)
  
+    React.useEffect(()=>{  
+        async function fetchData(){
+            let response = await fetch('https://covid19-graphql.netlify.app/', 
+            {   method: 'POST', 
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    query: `
+                       query  {
+                            countries {
+                                country
+                                countryInfo {
+                                    _id
+                                    flag
+                                    iso3
+                                    iso2
+                                }
+                            }
+                        }
+                    `
+                    })
+                })
+                let json = await response.json();
+                console.log(json.data.countries)
+                setData(json.data.countries)
+                setLoading(false)
+           }
+           fetchData()
+    }, [])
     
     // declaring of all functions 
     function closeCountry_1(){

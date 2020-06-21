@@ -70,7 +70,7 @@ export default function WorldData({Visible, close, SelectedCountry}){
                 let json = await response.json();
                
                 setData(json.data.countries)
-                setLoading(!loading)
+                setLoading(false)
            }
            fetchData()
     }, [])

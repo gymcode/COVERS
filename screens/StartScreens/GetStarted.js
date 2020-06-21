@@ -1,9 +1,34 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput, ImageBackground } from 'react-native'
+import {useQuery, useMutation} from '@apollo/react-hooks'
+import { userMutation } from '../../graphql/queries';
 
 export default function GetStarted({navigation}){
+  
   const [phoneNumber, setphoneNumber] = useState("0") 
-  console.log(phoneNumber.length)
+  const [loginUser, {loading}] = useMutation(userMutation)
+
+  async function login(){
+
+    await loginUser({variables: {phone: phoneNumber}})
+    .then((data)=>{
+      let success = data.data.loginUser.success
+      console.log(success)
+      if (success) {
+        alert("phone number valid proceed")
+        navigation.navigate('Information')
+      } else {
+        alert("invalid number try 0558691496")
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    
+    
+  }
+
+  
     return(
         
           <ImageBackground source={require('../../assets/fusion-medical-animation-EAgGqOiDDMg-unsplash.jpg')} resizeMode="cover" style={{flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20 }}>
@@ -41,9 +66,14 @@ export default function GetStarted({navigation}){
                         <Text style={{color: "#fff"}}>Get Started</Text>
                     </View>
                 : 
-                  <TouchableOpacity onPress={()=>{navigation.navigate('Information')}}>
+                  <TouchableOpacity onPress={()=>{login()}}>
                     <View style={{display: "flex", justifyContent: 'center', alignItems: "center", height: 45, width: 325,backgroundColor: "#22b266", marginVertical: 20}}>
-                        <Text style={{color: "#fff"}} >Get Started</Text>
+                        {
+                          loading ? 
+                          <Text  style={{color: "#fff"}} >loading</Text>
+                          :
+                          <Text style={{color: "#fff"}} >Get Started</Text>
+                        }
                     </View>
                   </TouchableOpacity>
                 }

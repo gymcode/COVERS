@@ -15,53 +15,33 @@ query {
 }
 
 `
-const getCountriesQuery = gql`
-{
-    countries{
-        country
-        countryInfo{
-            _id
-            lat
-            long
-            flag
-            iso3
-            iso2
-        }
-        continent
-        result {
-            tests
-            cases
-            todayCases
-            deaths
-            todayDeaths
-            recovered
-            active
-            critical
-            casesPerOneMillion
-            deathsPerOneMillion
-            testsPerOneMillion
-            updated
+const userMutation = gql`
+    mutation($phone: String!){ 
+        loginUser(input: {
+        phone: $phone
+        }){
+        success
+        message
         }
     }
-}
-`;
+  
+`
 
-const globalData = gql`
-   query{
-    globalTotal {
-        cases
-        todayCases
-        todayDeaths
-        recovered
-        deaths
-        active
+const validation = gql`
+    mutation($phone: String!, $otp: String!){ 
+        validateLoginUser(input: {
+        phone: $phone
+        otp: $otp
+        }){
+        mobileToken
+        }
     }
-   }
+
 `
 
 
 export{
     getCountryData,
-    getCountriesQuery,
-    globalData
-}
+    userMutation,
+    validation
+}   

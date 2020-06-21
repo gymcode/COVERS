@@ -26,7 +26,7 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 const client = new ApolloClient({
-  link: new HttpLink({uri: "https://covid19-graphql.netlify.app/"}), 
+  link: new HttpLink({uri: "https://signalc.herokuapp.com/GraphQL"}), 
   cache: new InMemoryCache()
 })
 

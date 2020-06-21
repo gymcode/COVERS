@@ -1,10 +1,32 @@
 import React, { useState } from 'react';
 import {View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { validation } from '../../graphql/queries'
+import {useMutation} from '@apollo/react-hooks'
 
 import VeriHeader from '../../components/VerificationHeader'
 
 export default function Verification({navigation}){
     const [text, setText] = useState("")
+    const [validateLoginUser, {loading}] = useMutation(validation)
+
+    async function validate(){
+
+      await validateLoginUser({variables: {phone: "0558691496", otp: text}})
+      .then((data)=>{
+        let success = data
+        console.log(success)
+        if (success) {
+          alert("phone number valid proceed")
+          // navigation.navigate('Verification')
+        } 
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      
+      
+    }
+  
 
     return(
         <View  style={{ flex: 1, backgroundColor: '#fff'}}>
@@ -30,9 +52,9 @@ export default function Verification({navigation}){
                 />
               </View>
 
-              <TouchableOpacity onPress={()=>{navigation.navigate('Verification')}}>
+              <TouchableOpacity onPress={()=>{validate()}}>
                 <View style={{marginVertical: 28, height: 45, width: 250 ,backgroundColor: "#000", justifyContent: 'center', alignItems: 'center',}}>
-                    <Text style={{color: "#fff"}}>Sumit Code</Text>
+                    <Text style={{color: "#fff"}}>Submit Code</Text>
                 </View>
               </TouchableOpacity>
 
