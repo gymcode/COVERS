@@ -10,7 +10,7 @@ import {Ionicons, AntDesign} from '@expo/vector-icons'
 import RadioButtons from 'radio-buttons-react-native';
 import {reportContext} from '../../../App'
 
-export default function ContentModal({Visible, Close}){
+export default function ContentModal({Visible, Close, Close2}){
     const [reporting, setReporting] = React.useState('')
     const [location, setLocation] = React.useState('')
     const [landmark, setLandmark] = React.useState('')
@@ -26,7 +26,6 @@ export default function ContentModal({Visible, Close}){
     ]
     
     function addReport(){
-        loading
         setTimeout(()=>{
             const newReport = {
                 id : Math.floor(Math.random()*100), 
@@ -38,8 +37,9 @@ export default function ContentModal({Visible, Close}){
             }
             makeCaseReport(newReport)
             setLoading(false)   
-            Close()
+            Close()    
         }, 2000)
+        
     }
 
     return(

@@ -72,7 +72,7 @@ export default function Report(){
               
               <FAB buttonColor="#000" 
                   iconTextColor="#fff" 
-                  onClickAction={()=>{setModal2(true)}} 
+                  onClickAction={()=>{setModal(true)}} 
                   visible={isFocused} 
                   iconTextComponent={<Ionicons name="ios-add" />} 
                   />

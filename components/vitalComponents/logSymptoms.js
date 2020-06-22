@@ -118,7 +118,7 @@ export default function LogSymptoms(){
             )}
         
           </TouchableOpacity>
-          </ScrollView>
+         </ScrollView>
           </View>
         
     )

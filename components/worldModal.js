@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {EvilIcons} from '@expo/vector-icons'
+import Lottie from 'lottie-react-native'
+import load from '../assets/loading/loading_2.json'
 
 
 const ListItem = ({name, flag, select, data})=>{
@@ -81,7 +83,7 @@ export default function WorldData({Visible, close, SelectedCountry}){
                 {
                     loading ?
                     <View style={{flex: 1, justifyContent: "center", alignItems: 'center',}}>
-                        <Text>hello</Text>
+                       <Lottie source={load} autoPlay loop style={{width: 35, height: 180}}/>
                     </View> 
                     :
                     <View style={{marginTop: 30, flex: 1}}>
