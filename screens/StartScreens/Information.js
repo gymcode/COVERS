@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import {View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import { validation } from '../../graphql/queries'
 import {useMutation} from '@apollo/react-hooks'
+import {contactContext} from '../../App'
 
 import VeriHeader from '../../components/VerificationHeader'
 
 export default function Verification({navigation}){
     const [text, setText] = useState("")
     const [validateLoginUser, {loading}] = useMutation(validation)
+    const {phoneNumber} = React.useContext(contactContext)
 
     async function validate(){
 
@@ -15,10 +17,13 @@ export default function Verification({navigation}){
       .then((data)=>{
         let success = data.data.validateLoginUser
         console.log(success)
-        if (success) {
-          alert(`Nice ${ success.user.lastName}`)
+        console.log(text)
+        if (text === "12345") {
+          alert(`Welcome Mr. ${ success.user.lastName}`)
           navigation.navigate('Verification')
-        } 
+        } else{
+          alert("Incorrect pin. Enter a valid Pin eg. 12345")
+        }
       })
       .catch(error => {
         console.log(error)
@@ -41,7 +46,7 @@ export default function Verification({navigation}){
               <View>
                 <Text>Enter the verification code</Text>
                 <Text style={{textAlign: "center", lineHeight:20}}>we just sent you on</Text>
-                <Text style={{textAlign: "center"}}>0505050505</Text>
+                <Text style={{textAlign: "center", fontWeight: "bold"}}>{phoneNumber}</Text>
               </View>
 
               <View style={{marginTop: 25}}>

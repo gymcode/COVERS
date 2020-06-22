@@ -11,6 +11,7 @@ import moment from 'moment'
 import {AntDesign, Ionicons} from '@expo/vector-icons'
 import {useIsFocused} from '@react-navigation/native'
 import ContentModal from '../../screens/TabScreens/Vitals/contentModal'
+import {height} from '../../constants/constants'
 
 export default function User({navigation}){
   const [modal2, setModal2] = useState(false)
@@ -31,8 +32,8 @@ export default function User({navigation}){
             {
                 vitalSymptoms.map((userSym)=>{
                     return(
-                        <View style={{marginTop: 10}}>
-                            <View>
+                        <View>
+                            <View style={{paddingVertical: 10}}>
                                 <Text>{covertDateTime(Date.now())}</Text>
                             </View>
                             <View style={{flexDirection: "row", paddingHorizontal: 7}}>
@@ -111,7 +112,7 @@ export default function User({navigation}){
                                 position: 'absolute',
                                 width: 65,
                                 height: 65,
-                                top: 280,
+                                top: height *.36,
                               }}
                             onClickAction={()=>{setModal2(true)}} 
                             visible={isFocused} 

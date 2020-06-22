@@ -4,11 +4,14 @@ import {
     Text, 
     Modal, 
     TouchableOpacity, 
-    TextInput
+    TextInput,
+    KeyboardAvoidingView,
+    ActivityIndicator
 } from 'react-native'
 import {Ionicons, AntDesign} from '@expo/vector-icons'
 import RadioButtons from 'radio-buttons-react-native';
 import {reportContext} from '../../../App'
+import {height} from '../../../constants/constants'
 
 export default function ContentModal({Visible, Close, Close2}){
     const [reporting, setReporting] = React.useState('')
@@ -16,7 +19,7 @@ export default function ContentModal({Visible, Close, Close2}){
     const [landmark, setLandmark] = React.useState('')
     const [contact, setContact] = React.useState('')
     const [description, setDescription] = React.useState('')
-    const [loading, setLoading] = React.useState(true)
+    const [loading, setLoading] = React.useState(false)
     const {Generalreport, makeCaseReport} = useContext(reportContext)
     
        // Radio Button data
@@ -26,6 +29,7 @@ export default function ContentModal({Visible, Close, Close2}){
     ]
     
     function addReport(){
+        setLoading(true)
         setTimeout(()=>{
             const newReport = {
                 id : Math.floor(Math.random()*100), 
@@ -37,14 +41,16 @@ export default function ContentModal({Visible, Close, Close2}){
             }
             makeCaseReport(newReport)
             setLoading(false)   
+            
             Close()    
         }, 2000)
+        alert("report added successfully")
         
     }
 
     return(
         <Modal visible={Visible} animationType="slide" presentationStyle={'pageSheet'}>
-            <View style={{padding: 20}}>
+            <KeyboardAvoidingView style={{padding: 20}}>
 
                 <View style={{flexDirection: "row", justifyContent: 'space-between'}}> 
                     <View>
@@ -140,17 +146,17 @@ export default function ContentModal({Visible, Close, Close2}){
                     </View>
                     
                     <TouchableOpacity onPress={()=>{addReport()}}>
-                        <View style={{justifyContent: "center", alignItems: 'center', top: 100, position: "fixed", height: 45, backgroundColor: "#000"}}>
-                            {
-                                loading ? 
-                                <Text style={{fontWeight: "bold", color: "#fff"}}>Report case</Text>
-                                :
-                                <Text style={{fontWeight: "bold", color: "#fff"}}>Loading...</Text>
-                            }
+                        <View style={{justifyContent: "center", alignItems: 'center', top: height * 0.15, position: "fixed", height: 45, backgroundColor: "#000"}}>
+                             {
+                                 loading ?
+                                 <ActivityIndicator color="#fff"/>
+                                 :
+                                 <Text style={{fontWeight: "bold", color: "#fff"}}>Report case</Text>
+                             }
                         </View>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         </Modal>
     )
 }

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, SafeAreaView, TouchableOpacity, Modal, Image} from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
+import {width, height} from 'react-native'
 
 // subcomponents
 import Account from '../screens/Modals/account'
@@ -21,7 +22,7 @@ export default function Header(props){
     }
 
     return(
-            <View style={{height: 110, padding: 20, width: 380,backgroundColor: "#fff", marginTop:7, borderBottomWidth: .3, borderBottomColor: "#ccc"}}>
+            <View style={{height: height, padding: 20, width: 380,backgroundColor: "#fff", marginTop:7, borderBottomWidth: .3, borderBottomColor: "#ccc"}}>
                <SafeAreaView>
                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                        <TouchableOpacity onPress={()=>{setOpenAccount(!openAccount)}}>

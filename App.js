@@ -78,12 +78,14 @@ const MainSectionTab = ()=>{
 const Stack = createStackNavigator();
 
 export const reportContext = React.createContext({})
-export const vitalContext = React .createContext({})
+export const vitalContext = React.createContext({})
+export const contactContext = React.createContext({})
 
 export default function App(){
   
   const [Generalreport, setGenaralReport] = React.useState([])
   const [vitalSymptoms, setSymptoms] = React.useState([])
+  const [phoneNumber, setphoneNumber] = React.useState("0")
 
   function makeCaseReport(report){
     setGenaralReport([...Generalreport, report])
@@ -93,28 +95,34 @@ export default function App(){
     setSymptoms([...vitalSymptoms, symptopms])
   }
 
+  function phone(phone){
+    setphoneNumber(phone)
+  }
+
   return(
     <ApolloProvider client={client}>
       <reportContext.Provider value={{Generalreport, makeCaseReport}}>
         <vitalContext.Provider value={{vitalSymptoms, reportSymptom}}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="GetStarted" component={GetStarted} 
-            options={{headerShown: false}}
-            />
-            <Stack.Screen name="Verification" component={Verification} 
-            options={{headerShown: false}}
-            />
-            <Stack.Screen name="Information" component={Information} 
-            options={{ headerShown: false}}
-            />
-            <Stack.Screen name="Main" component={MainSectionTab} 
-              options={{
-                headerShown: false
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+          <contactContext.Provider value={{phoneNumber, phone}}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="GetStarted" component={GetStarted} 
+              options={{headerShown: false}}
+              />
+              <Stack.Screen name="Verification" component={Verification} 
+              options={{headerShown: false}}
+              />
+              <Stack.Screen name="Information" component={Information} 
+              options={{ headerShown: false}}
+              />
+              <Stack.Screen name="Main" component={MainSectionTab} 
+                options={{
+                  headerShown: false
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+          </contactContext.Provider>
         </vitalContext.Provider>
         </reportContext.Provider>
     </ApolloProvider>

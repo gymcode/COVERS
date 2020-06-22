@@ -60,14 +60,14 @@ function addCommas(value){
                 :
                 <ScrollView horizontal={true} >
                 <ImageBackground source={require("../../assets/patient-with-iv-line-3845126.jpg")} imageStyle={{borderRadius: 10}} style={{height: 160, width: 300, marginHorizontal: 20, borderRadius: 50,}}>
-                  <View style={{marginLeft: 120,}}>
+                  <View style={{marginLeft: 100,}}>
                     <Text style={{color: "#fff", fontSize:43, fontWeight: "bold"}}>{addCommas(data.cases)}</Text>
                     <Text style={{color: "#fff", fontWeight:"bold"}}> Confirmed cases</Text>
                   </View>
                 </ImageBackground>
 
                 <ImageBackground source={require("../../assets/top-view-of-various-pills-and-vitamins-placed-in-diverse-3850809.jpg")} imageStyle={{borderRadius: 10}} style={{height: 160, width: 320, borderRadius: 50,}}>
-                  <View style={{marginLeft: 120,}}>
+                  <View style={{marginLeft: 100,}}>
                       <Text style={{color: "#fff", fontWeight:"bold", fontSize:43}}>{addCommas(data.recovered)}</Text>
                       <Text style={{color: "#fff", fontWeight:"bold"}}> Recovered</Text>
                     </View>

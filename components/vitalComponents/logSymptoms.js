@@ -80,7 +80,7 @@ export default function LogSymptoms(){
       
     return(
           <View>
-           <ScrollView showsVerticalScrollIndicator={false}>
+           <View showsVerticalScrollIndicator={false}>
                 <View style={{ paddingTop: 10 }}>
                 {Symptoms.map(symptom => (
                     <View key={symptom.id} style={styles.container}>
@@ -118,7 +118,7 @@ export default function LogSymptoms(){
             )}
         
           </TouchableOpacity>
-         </ScrollView>
+         </View>
           </View>
         
     )

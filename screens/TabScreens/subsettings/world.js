@@ -164,7 +164,7 @@ export default function World({Visible, Close}){
                                             <Text>hello</Text>
                                         </View>
                                         :
-                                        <Text style={{fontSize: 24}}>
+                                        <Text style={{fontSize: 22}}>
                                             {addCommas(data.cases)}
                                         </Text>
                                     }
@@ -180,7 +180,7 @@ export default function World({Visible, Close}){
                                             <Text>hello</Text>
                                         </View>
                                         :
-                                        <Text style={{fontSize: 24}}>
+                                        <Text style={{fontSize: 22}}>
                                             {addCommas(data.recovered)}
                                         </Text>
                                     }
@@ -197,7 +197,7 @@ export default function World({Visible, Close}){
                                         <Text>hello</Text>
                                     </View>
                                     :
-                                    <Text style={{fontSize: 24}}>
+                                    <Text style={{fontSize: 22}}>
                                         {addCommas(data.deaths)}
                                     </Text>
                                 }
@@ -249,31 +249,31 @@ export default function World({Visible, Close}){
                    <View style={{flexDirection: "column", flex:2, borderRightWidth: .3, borderRightColor: "#e3e3e3"}}>
                        <View>
                             <Text style={{color: "#800080", fontSize: 16}}>Confirmed</Text>
-                            <Text>{addCommas(iniCountry.result.cases)}</Text>
+                            <Text style={{fontWeight: "bold"}}>{addCommas(iniCountry.result.cases)}</Text>
                        </View>
                        <View style={{marginTop: 20}}>
                             <Text style={{color: "yellow", fontSize: 16}}>Active</Text>
-                            <Text>{addCommas(iniCountry.result.active)}</Text>
+                            <Text style={{fontWeight: "bold"}}>{addCommas(iniCountry.result.active)}</Text>
                        </View>
                    </View>
                    <View style={{flexDirection: "column", flex:2, marginLeft: 10,  borderRightWidth: .3, borderRightColor: "#e3e3e3"}}>
                        <View>
                             <Text style={{color: "green", fontSize: 16}}>Recovered</Text>
-                            <Text>{addCommas(iniCountry.result.recovered)}</Text>
+                            <Text style={{fontWeight: "bold"}}>{addCommas(iniCountry.result.recovered)}</Text>
                        </View>
                        <View style={{marginTop: 20}}>
                             <Text style={{color: "red", fontSize: 16}}>Critical</Text>
-                            <Text>{addCommas(iniCountry.result.critical)}</Text>
+                            <Text style={{fontWeight: "bold"}}>{addCommas(iniCountry.result.critical)}</Text>
                        </View>
                    </View>
                    <View style={{flexDirection: "column",flex:2, marginLeft: 10}}>
                        <View>
                             <Text style={{color: "red", fontSize: 16}}>Deaths</Text>
-                            <Text>{addCommas(iniCountry.result.deaths)}</Text>
+                            <Text style={{fontWeight: "bold"}}>{addCommas(iniCountry.result.deaths)}</Text>
                        </View>
                        <View style={{marginTop: 20}}>
                             <Text style={{color: "#b300b3", fontSize: 16}}>Tests</Text>
-                            <Text>{addCommas(iniCountry.result.tests)}</Text>
+                            <Text style={{fontWeight: "bold"}}>{addCommas(iniCountry.result.tests)}</Text>
                        </View>
                    </View>
                 </View>

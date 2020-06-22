@@ -6,6 +6,7 @@ import {
     TouchableOpacity, 
     StyleSheet
 } from 'react-native'
+import {height} from '../../../constants/constants'
 import {Ionicons} from '@expo/vector-icons'
 
 
@@ -45,7 +46,7 @@ export default function Assessment({Visible, Close}){
                             }
                         </Text>
                     </View>
-                    <View style={{ marginTop: 900 * 0.34 }}>
+                    <View style={{ marginTop: height * 0.44 }}>
                     <TouchableOpacity style={styles.button}>
                         <Text style={([styles.mainTitle], { color: 'white' })}>
                         Start Assessment...

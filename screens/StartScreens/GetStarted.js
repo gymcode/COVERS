@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput, ImageBackground } from 'react-native'
 import {useQuery, useMutation} from '@apollo/react-hooks'
 import { userMutation } from '../../graphql/queries';
+import {contactContext} from '../../App'
 
 export default function GetStarted({navigation}){
   
-  const [phoneNumber, setphoneNumber] = useState("0") 
   const [loginUser, {loading}] = useMutation(userMutation)
+  const {phoneNumber, phone} = React.useContext(contactContext)
 
   async function login(){
 
@@ -51,7 +52,7 @@ export default function GetStarted({navigation}){
                     <TextInput
                       style={{backgroundColor: "#fff", height: 45, width: 220, padding: 10}}
                       keyboardType="number-pad"
-                      onChangeText={(phoneNumber)=>{setphoneNumber(phoneNumber)}}
+                      onChangeText={(phoneNumber)=>{phone(phoneNumber)}}
                     />
                   </View>
                   <View style={{display: "flex", alignItemsL: "center", justifyContent: "center", padding: 10}}>
@@ -66,7 +67,7 @@ export default function GetStarted({navigation}){
                         <Text style={{color: "#fff"}}>Get Started</Text>
                     </View>
                 : 
-                  <TouchableOpacity onPress={()=>{navigation.navigate('Information')}}>
+                  <TouchableOpacity onPress={()=>{login()}}>
                     <View style={{display: "flex", justifyContent: 'center', alignItems: "center", height: 45, width: 325,backgroundColor: "#22b266", marginVertical: 20}}>
                         {
                           loading ? 

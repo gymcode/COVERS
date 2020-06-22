@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, ScrollView } from 'react-native'
-
+import {width, height} from '../../constants/constants'
 import InfoHeader from '../../components/GeneralInfoHeader'
 import InfoContent from '../../components/infoContent'
 

@@ -3,7 +3,10 @@ import {
     View,
     Text, 
     Modal, 
-    TouchableOpacity
+    TouchableOpacity, 
+    ActivityIndicator, 
+    StyleSheet, 
+    ScrollView
 } from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 
@@ -11,6 +14,7 @@ import LogSymptoms from '../../../components/vitalComponents/logSymptoms'
 
 
 export default function ContentModal({Visible, Close}){
+    const [load, setLoad] = React.useState(false);
     return(
         <Modal visible={Visible} animationType="slide" presentationStyle={'pageSheet'}>
             <View style={{padding: 20}}>
@@ -29,11 +33,11 @@ export default function ContentModal({Visible, Close}){
                     </TouchableOpacity>
                 </View>
 
-                <View style={{marginTop: 30}}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{marginTop: 30}}>
                     <LogSymptoms/>
-                </View>
+                </ScrollView>
+                
             </View>
         </Modal>
     )
 }
-

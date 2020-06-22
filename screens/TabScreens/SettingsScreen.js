@@ -112,7 +112,7 @@ export default function Settings(){
                   <TouchableOpacity onPress={()=>{setWorld(!worldStat)}}>
                     <View style={{padding: 20, flexDirection: "row"}}>
                       <View style={{flex: 7}}>
-                        <Text style={{fontWeight: "bold", fontSize: 17}}>WorldWIde Statistics</Text>
+                        <Text style={{fontWeight: "bold", fontSize: 17}}>WorldWide Statistics</Text>
                         <Text style={{fontSize: 13}}>Check out the worldwide Statisticsof every country</Text>
                       </View>
                       <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
