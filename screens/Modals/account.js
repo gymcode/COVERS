@@ -1,7 +1,8 @@
 import React, {useState, useContext} from 'react'; 
-import {View, Modal, Text, TouchableOpacity, TextInput, FlatList, Image} from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
+import {View, Modal, Text, TouchableOpacity, TextInput, FlatList, Image, Alert} from 'react-native'
+import {Ionicons, AntDesign} from '@expo/vector-icons'
 import {useQuery} from '@apollo/react-hooks'
+import RadioButtons from 'radio-buttons-react-native';
 import {countryContext} from '../../App'
 import Lottie  from 'lottie-react-native'
 import load from '../../assets/loading/loading_2.json'
@@ -36,6 +37,13 @@ export default function Account ({Visible, Close}){
       })
       const [loading, setLoading] = useState(true)
       const [data, setData] = useState(null)
+
+       // Radio Button data
+        const rbData = [
+            {label:'Male' },
+            {label:'Female'}
+        ]
+
  
     React.useEffect(()=>{  
         async function fetchData(){
@@ -62,7 +70,7 @@ export default function Account ({Visible, Close}){
                     })
                 })
                 let json = await response.json();
-                console.log(json.data.countries)
+                
                 setData(json.data.countries)
                 setLoading(false)
            }
@@ -79,14 +87,29 @@ export default function Account ({Visible, Close}){
     }
 
     function selectedData(data){
-        console.log(data)
+        
         setFlag_1({...data})
     }
 
     function selectedData2(data){
-        console.log(data)
+        
         setFlag_2({...data})
     }
+
+    function update(){
+        // Close()
+        // alert("profile updated")
+        setTimeout(()=>{  
+            alert("You updated your profile successfully")
+            
+        }, 2000)
+        setTimeout(()=>{
+            Close()
+        }, 1000)
+        
+         
+    }
+
 
     return(
         <Modal visible={Visible} animationType="slide" presentationStyle={"pageSheet"} style={{borderRaduis: 10}}>
@@ -101,7 +124,7 @@ export default function Account ({Visible, Close}){
 
                     <View style={{flexDirection: "row", justifyContent: 'space-between'}}> 
                         <View>
-                            <Text style={{}} style={{fontSize: 35, fontWeight: "bold"}}>Profile</Text>
+                            <Text style={{fontSize: 35, fontWeight: "bold"}}>Profile</Text>
                         </View>
                         <TouchableOpacity onPress={Close}>
                             <View>
@@ -114,12 +137,12 @@ export default function Account ({Visible, Close}){
                     </View>
 
                     {/* content */}
-                    <View style={{marginTop: 40}}>
+                    <View style={{marginTop: 20}}>
 
                         <View>
                             <Text style={{fontWeight: "bold"}}>Personal Details</Text>
                         </View>
-                        <View style={{marginTop: 20}}>
+                        <View style={{marginTop: 15}}>
                             <Text>Enter Age</Text>
                         </View>
                         <View style={{marginVertical: 14}}>
@@ -129,39 +152,35 @@ export default function Account ({Visible, Close}){
                             />
                         </View>
 
-                        {/* RadioButtons */}
-                         <View style={{flexDirection: "row"}}>
-                             <View style={{flexDirection: "row"}}>
-                                <View>
-                                    <Ionicons
-                                     name="ios-checkmark-circle"
-                                     size={25}
-                                    />
-                                </View>                                
-                                <View style={{paddingHorizontal: 8, alignItems: "center", justifyContent: "center"}}>
-                                    <Text>Female</Text>
-                                </View>                                
-                             </View>
-                             <View style={{flexDirection: "row", paddingHorizontal: 30}}>
-                                <View>
-                                    <Ionicons
-                                     name="ios-checkmark-circle"
-                                     size={25}
-                                    />
-                                </View>    
-                                <View style={{paddingHorizontal: 8, alignItems: "center", justifyContent: "center"}}>
-                                    <Text>Male</Text>
-                                </View>                                
-                             </View>
-                         </View>
+                        {/* Radio buttons */}
+                        <View>
+                            <RadioButtons
+                            data={rbData}
+                            animationTypes={['shake']}
+                            circleSize={16}
+                            selectedBtn={e=>console.log(e)}
+                            initial={3}
+                            box={false}
+                            activeColor="black"
+                            inactiveColor="grey"
+                            textStyle={{letterSpacing:-0.4,}}
+                            icon={
+                                <AntDesign 
+                                    name="checkcircle"
+                                    size={20}
+                                    // color="#2c9dd1"
+                                />
+                            }
+                            />
+                        </View>
 
                         {/* travelhistory */}
-                        <View style={{marginVertical: 20}}>
+                        <View style={{marginVertical: 15}}>
                             <View>
                                 <Text style={{fontWeight: "bold"}}>Travel History</Text>
                                 <Text>Select the last two countries you visited(if Applicable)</Text>
                             </View>
-                            <View style={{marginTop: 25, flexDirection: "row"}}>
+                            <View style={{marginTop: 20, flexDirection: "row"}}>
                                 <View style={{flex: 8, height: 80,borderWidth: 1, borderColor: "#aaa",  borderRadius: 5,paddingHorizontal: 10, justifyContent: "center", alignItems: "center"}}>
                                     <TouchableOpacity onPress={()=>{setInitialmodal(!initialModal)}}>
                                        <Image source={{uri: flag_1.countryInfo.flag}} style={{height: 20, width: 30}} />
@@ -197,7 +216,7 @@ export default function Account ({Visible, Close}){
                                 />
                             </View>
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>{update()}}>
                                 <View style={{height: 45, backgroundColor: "#000", justifyContent: 'center', alignItems: 'center',}}>
                                     <Text style={{color: "#fff"}}>Update Profile</Text>
                                 </View>

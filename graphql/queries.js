@@ -34,6 +34,10 @@ const validation = gql`
         otp: $otp
         }){
         mobileToken
+        user{
+            lastName
+            otherNames
+          }
         }
     }
 

@@ -77,24 +77,19 @@ const MainSectionTab = ()=>{
 
 const Stack = createStackNavigator();
 
-export const countryContext = React.createContext({})
 export const reportContext = React.createContext({})
 
 export default function App(){
-  const [editedItem, setEditedItem] = React.useState(0)
   
+  const [Generalreport, setGenaralReport] = React.useState()
 
-  function setState(item){
-    setEditedItem(item)
-  }
-
-  function handleItem(editedItem){
-    console.log(editedItem)
+  function makeCaseReport(report){
+    setGenaralReport(report)
   }
 
   return(
     <ApolloProvider client={client}>
-      <countryContext.Provider value={{editedItem, handleItem, setState}}>
+      <reportContext.Provider value={{Generalreport, makeCaseReport}}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="GetStarted" component={GetStarted} 
@@ -113,7 +108,7 @@ export default function App(){
             />
           </Stack.Navigator>
         </NavigationContainer>
-        </countryContext.Provider>
+        </reportContext.Provider>
     </ApolloProvider>
   )
 }

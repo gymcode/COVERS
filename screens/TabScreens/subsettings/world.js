@@ -7,9 +7,11 @@ import {
     StyleSheet, 
     Image
 } from 'react-native'
+import numeral from 'numeral'
 import {Ionicons} from '@expo/vector-icons'
 
 import WorldData from '../../../components/worldModal'
+import { add } from 'react-native-reanimated'
 
 export default function World({Visible, Close}){
     const [data, setData] = React.useState(null)
@@ -113,6 +115,10 @@ export default function World({Visible, Close}){
            countryData()
     }, [])
 
+    function addCommas(value){
+        return numeral(value).format('0,0')
+      }      
+
     
 
     return(
@@ -159,7 +165,7 @@ export default function World({Visible, Close}){
                                         </View>
                                         :
                                         <Text style={{fontSize: 24}}>
-                                            {data.cases}
+                                            {addCommas(data.cases)}
                                         </Text>
                                     }
                                 </View>
@@ -175,7 +181,7 @@ export default function World({Visible, Close}){
                                         </View>
                                         :
                                         <Text style={{fontSize: 24}}>
-                                            {data.recovered}
+                                            {addCommas(data.recovered)}
                                         </Text>
                                     }
                                 </View>
@@ -192,7 +198,7 @@ export default function World({Visible, Close}){
                                     </View>
                                     :
                                     <Text style={{fontSize: 24}}>
-                                        {data.deaths}
+                                        {addCommas(data.deaths)}
                                     </Text>
                                 }
                             </View>
@@ -243,31 +249,31 @@ export default function World({Visible, Close}){
                    <View style={{flexDirection: "column", flex:2, borderRightWidth: .3, borderRightColor: "#e3e3e3"}}>
                        <View>
                             <Text style={{color: "#800080", fontSize: 16}}>Confirmed</Text>
-                            <Text>{iniCountry.result.cases}</Text>
+                            <Text>{addCommas(iniCountry.result.cases)}</Text>
                        </View>
                        <View style={{marginTop: 20}}>
                             <Text style={{color: "yellow", fontSize: 16}}>Active</Text>
-                            <Text>{iniCountry.result.active}</Text>
+                            <Text>{addCommas(iniCountry.result.active)}</Text>
                        </View>
                    </View>
                    <View style={{flexDirection: "column", flex:2, marginLeft: 10,  borderRightWidth: .3, borderRightColor: "#e3e3e3"}}>
                        <View>
                             <Text style={{color: "green", fontSize: 16}}>Recovered</Text>
-                            <Text>{iniCountry.result.recovered}</Text>
+                            <Text>{addCommas(iniCountry.result.recovered)}</Text>
                        </View>
                        <View style={{marginTop: 20}}>
                             <Text style={{color: "red", fontSize: 16}}>Critical</Text>
-                            <Text>{iniCountry.result.critical}</Text>
+                            <Text>{addCommas(iniCountry.result.critical)}</Text>
                        </View>
                    </View>
                    <View style={{flexDirection: "column",flex:2, marginLeft: 10}}>
                        <View>
                             <Text style={{color: "red", fontSize: 16}}>Deaths</Text>
-                            <Text>{iniCountry.result.deaths}</Text>
+                            <Text>{addCommas(iniCountry.result.deaths)}</Text>
                        </View>
                        <View style={{marginTop: 20}}>
                             <Text style={{color: "#b300b3", fontSize: 16}}>Tests</Text>
-                            <Text>{iniCountry.result.tests}</Text>
+                            <Text>{addCommas(iniCountry.result.tests)}</Text>
                        </View>
                    </View>
                 </View>

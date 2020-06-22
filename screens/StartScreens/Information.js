@@ -13,11 +13,11 @@ export default function Verification({navigation}){
 
       await validateLoginUser({variables: {phone: "0558691496", otp: text}})
       .then((data)=>{
-        let success = data
+        let success = data.data.validateLoginUser
         console.log(success)
         if (success) {
-          alert("phone number valid proceed")
-          // navigation.navigate('Verification')
+          alert(`Nice ${ success.user.lastName}`)
+          navigation.navigate('Verification')
         } 
       })
       .catch(error => {
@@ -54,7 +54,12 @@ export default function Verification({navigation}){
 
               <TouchableOpacity onPress={()=>{validate()}}>
                 <View style={{marginVertical: 28, height: 45, width: 250 ,backgroundColor: "#000", justifyContent: 'center', alignItems: 'center',}}>
-                    <Text style={{color: "#fff"}}>Submit Code</Text>
+                    {
+                      loading ?
+                      <Text style={{color: "#fff"}}>loading...</Text>
+                      :
+                      <Text style={{color: "#fff"}}>Submit Code</Text>
+                    }
                 </View>
               </TouchableOpacity>
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {
     View,
     Text, 
@@ -6,10 +6,45 @@ import {
     TouchableOpacity, 
     TextInput
 } from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
-
+import {Ionicons, AntDesign} from '@expo/vector-icons'
+import RadioButtons from 'radio-buttons-react-native';
+import {reportContext} from '../../../App'
 
 export default function ContentModal({Visible, Close}){
+    const [reporting, setReporting] = React.useState('')
+    const [location, setLocation] = React.useState('')
+    const [landmark, setLandmark] = React.useState('')
+    const [contact, setContact] = React.useState('')
+    const [description, setDescription] = React.useState('')
+    const [loading, setLoading] = React.useState(true)
+    const {Generalreport, makeCaseReport} = useContext(reportContext)
+    
+       // Radio Button data
+       const rbData = [
+        {label:'Self' },
+        {label:'Other Individual'}
+    ]
+    
+    function addReport(){
+        loading
+        setTimeout(()=>{
+
+            const newReport = {
+                id : Math.floor(Math.random()*100), 
+                reporting,
+                location, 
+                landmark, 
+                contact, 
+                description
+            }
+            
+            makeCaseReport(newReport)
+            setLoading(false)
+            
+        }, 2000)
+    }
+
+
     return(
         <Modal visible={Visible} animationType="slide" presentationStyle={'pageSheet'}>
             <View style={{padding: 20}}>
@@ -34,31 +69,27 @@ export default function ContentModal({Visible, Close}){
                         <Text style={{fontWeight: "bold"}}>Who are you reporting</Text>
                     </View>
 
-                    {/* RadioButtons */}
-                    <View style={{flexDirection: "row", marginTop: 10}}>
-                             <View style={{flexDirection: "row"}}>
-                                <View>
-                                    <Ionicons
-                                     name="ios-checkmark-circle"
-                                     size={22}
-                                    />
-                                </View>                                
-                                <View style={{paddingHorizontal: 8, alignItems: "center", justifyContent: "center"}}>
-                                    <Text>Self</Text>
-                                </View>                                
-                             </View>
-                             <View style={{flexDirection: "row", paddingHorizontal: 5}}>
-                                <View>
-                                    <Ionicons
-                                     name="ios-checkmark-circle"
-                                     size={22}
-                                    />
-                                </View>    
-                                <View style={{paddingHorizontal: 8, alignItems: "center", justifyContent: "center"}}>
-                                    <Text>Other individual</Text>
-                                </View>                                
-                             </View>
-                     </View>
+                    {/* Radio buttons */}
+                    <View>
+                            <RadioButtons
+                            data={rbData}
+                            animationTypes={['shake']}
+                            circleSize={16}
+                            selectedBtn={reporting=>setReporting(reporting)}
+                            initial={3}
+                            box={false}
+                            activeColor="black"
+                            inactiveColor="grey"
+                            textStyle={{letterSpacing:-0.4,}}
+                            icon={
+                                <AntDesign 
+                                    name="checkcircle"
+                                    size={20}
+                                    // color="#2c9dd1"
+                                />
+                            }
+                            />
+                        </View>
 
                     <View style={{marginTop: 20}}>
                         <View style={{marginLeft: 5}}>
@@ -68,7 +99,7 @@ export default function ContentModal({Visible, Close}){
                         <View style={{marginVertical: 8}}>
                             <TextInput
                                 style={{borderWidth: 1, borderColor: "#eee", height: 45, padding: 10}}
-                                onPress={(age)=>{setAge(age)}}
+                                onChangeText={(location)=>{setLocation(location)}}
                             />
                         </View>
 
@@ -80,7 +111,7 @@ export default function ContentModal({Visible, Close}){
                                 <View style={{marginTop: 8}}>
                                     <TextInput
                                         style={{borderWidth: 1, borderColor: "#eee", height: 45, padding: 10}}
-                                        onPress={(age)=>{setAge(age)}}
+                                        onChangeText={(landmark)=>{setLandmark(landmark)}}
                                     />
                                 </View>
                             </View>
@@ -91,7 +122,7 @@ export default function ContentModal({Visible, Close}){
                                 <View style={{marginTop: 8}}>
                                     <TextInput
                                         style={{borderWidth: 1, borderColor: "#eee", height: 45, padding: 10}}
-                                        onPress={(age)=>{setAge(age)}}
+                                        onChangeText={(contact)=>{setContact(contact)}}
                                     />
                                 </View>
                             </View>
@@ -104,16 +135,21 @@ export default function ContentModal({Visible, Close}){
 
                             <View style={{marginVertical: 8}}>
                                 <TextInput
-                                    style={{borderWidth: 1, borderColor: "#eee", height: 90, padding: 10}}
-                                    onPress={(age)=>{setAge(age)}}
+                                    style={{borderWidth: 1, borderColor: "#eee", height: 90, paddingLeft: 10}}
+                                    onChangeText={(description)=>{setDescription(description)}}
                                 />
                             </View>
                         </View>
                     </View>
                     
-                    <TouchableOpacity onPress={()=>{console.log("is pressed")}}>
-                        <View style={{justifyContent: "center", alignItems: 'center', top: 140, position: "fixed", height: 45, backgroundColor: "#000"}}>
-                            <Text style={{fontWeight: "bold", color: "#fff"}}>Report case</Text>
+                    <TouchableOpacity onPress={()=>{addReport()}}>
+                        <View style={{justifyContent: "center", alignItems: 'center', top: 100, position: "fixed", height: 45, backgroundColor: "#000"}}>
+                            {
+                                loading ? 
+                                <Text style={{fontWeight: "bold", color: "#fff"}}>Report case</Text>
+                                :
+                                <Text style={{fontWeight: "bold", color: "#fff"}}>Loading...</Text>
+                            }
                         </View>
                     </TouchableOpacity>
                 </View>

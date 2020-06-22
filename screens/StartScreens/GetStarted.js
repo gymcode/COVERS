@@ -66,7 +66,7 @@ export default function GetStarted({navigation}){
                         <Text style={{color: "#fff"}}>Get Started</Text>
                     </View>
                 : 
-                  <TouchableOpacity onPress={()=>{login()}}>
+                  <TouchableOpacity onPress={()=>{navigation.navigate('Information')}}>
                     <View style={{display: "flex", justifyContent: 'center', alignItems: "center", height: 45, width: 325,backgroundColor: "#22b266", marginVertical: 20}}>
                         {
                           loading ? 
