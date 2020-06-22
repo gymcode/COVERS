@@ -26,7 +26,7 @@ export default function Header(props){
                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                        <TouchableOpacity onPress={()=>{setOpenAccount(!openAccount)}}>
                             <View>
-                                <Image source={require("../assets/man.png")} style={{height: 30, width: 30}}/>
+                                <Image source={require("../assets/profile.jpeg")}style={{height: 35, width: 35, borderRadius: 50}}/>
                             </View>
                        </TouchableOpacity>
 

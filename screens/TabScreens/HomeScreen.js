@@ -52,6 +52,15 @@ export default function Home(){
                     <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Nibh venenatis cras sed felis eget velit aliquet sagittis. Vitae nunc sed velit dignissim sodales ut eu sem integer. Fermentum leo vel orci porta. Morbi tristique senectus et netus et malesuada. Consequat interdum varius sit amet mattis vulputate enim nulla aliquet. Id semper risus in hendrerit gravida rutrum quisque. Lectus vestibulum mattis ullamcorper velit. Viverra maecenas accumsan lacus vel facilisis. Cursus risus at ultrices mi.</Text>
                   </View>
               </View>
+              <View style={{padding: 25,}}>
+                  <View>
+                    <Text style={{fontWeight: "bold"}}>Confirmed Covid-19 Cases In Ghana As At 25 March 2020, 09:00 Hr</Text>
+                  </View>
+                  <Hr/>
+                  <View>
+                    <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Nibh venenatis cras sed felis eget velit aliquet sagittis. Vitae nunc sed velit dignissim sodales ut eu sem integer. Fermentum leo vel orci porta. Morbi tristique senectus et netus et malesuada. Consequat interdum varius sit amet mattis vulputate enim nulla aliquet. Id semper risus in hendrerit gravida rutrum quisque. Lectus vestibulum mattis ullamcorper velit. Viverra maecenas accumsan lacus vel facilisis. Cursus risus at ultrices mi.</Text>
+                  </View>
+              </View>
             </View>
           </ScrollView>
         </View>

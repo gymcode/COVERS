@@ -78,18 +78,25 @@ const MainSectionTab = ()=>{
 const Stack = createStackNavigator();
 
 export const reportContext = React.createContext({})
+export const vitalContext = React .createContext({})
 
 export default function App(){
   
-  const [Generalreport, setGenaralReport] = React.useState()
+  const [Generalreport, setGenaralReport] = React.useState([])
+  const [vitalSymptoms, setSymptoms] = React.useState([])
 
   function makeCaseReport(report){
-    setGenaralReport(report)
+    setGenaralReport([...Generalreport, report])
+  }
+
+  function reportSymptom(symptopms){
+    setSymptoms([...vitalSymptoms, symptopms])
   }
 
   return(
     <ApolloProvider client={client}>
       <reportContext.Provider value={{Generalreport, makeCaseReport}}>
+        <vitalContext.Provider value={{vitalSymptoms, reportSymptom}}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="GetStarted" component={GetStarted} 
@@ -108,6 +115,7 @@ export default function App(){
             />
           </Stack.Navigator>
         </NavigationContainer>
+        </vitalContext.Provider>
         </reportContext.Provider>
     </ApolloProvider>
   )

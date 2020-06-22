@@ -177,39 +177,7 @@ export default function Settings(){
                   </TouchableOpacity>
                 </View>
 
-                <View style={{borderBottomWidth: .3, borderColor: "#ccc"}}>
-                  <TouchableOpacity>
-                    <View style={{padding: 20, flexDirection: "row"}}>
-                      <View style={{flex: 7}}>
-                        <Text style={{fontWeight: "bold"}}>sdjkbsbkdfsd</Text>
-                        <Text>;fsdfsdfsdfsdf</Text>
-                      </View>
-                      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                        <Ionicons
-                          name="ios-arrow-forward"
-                          size= {20}
-                        />
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-
-                <View style={{borderBottomWidth: .3, borderColor: "#ccc"}}>
-                  <TouchableOpacity>
-                    <View style={{padding: 20, flexDirection: "row"}}>
-                      <View style={{flex: 7}}>
-                        <Text style={{fontWeight: "bold"}}>sdjkbsbkdfsd</Text>
-                        <Text>;fsdfsdfsdfsdf</Text>
-                      </View>
-                      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-                        <Ionicons
-                          name="ios-arrow-forward"
-                          size= {20}
-                        />
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </View>
+                
 
                 
             </ScrollView>

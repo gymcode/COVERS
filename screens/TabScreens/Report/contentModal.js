@@ -28,7 +28,6 @@ export default function ContentModal({Visible, Close}){
     function addReport(){
         loading
         setTimeout(()=>{
-
             const newReport = {
                 id : Math.floor(Math.random()*100), 
                 reporting,
@@ -37,13 +36,11 @@ export default function ContentModal({Visible, Close}){
                 contact, 
                 description
             }
-            
             makeCaseReport(newReport)
-            setLoading(false)
-            
+            setLoading(false)   
+            Close()
         }, 2000)
     }
-
 
     return(
         <Modal visible={Visible} animationType="slide" presentationStyle={'pageSheet'}>
@@ -51,7 +48,7 @@ export default function ContentModal({Visible, Close}){
 
                 <View style={{flexDirection: "row", justifyContent: 'space-between'}}> 
                     <View>
-                        <Text style={{}} style={{fontSize: 35, fontWeight: "bold"}}>Make Report</Text>
+                        <Text style={{fontSize: 35, fontWeight: "bold"}}>Make Report</Text>
                     </View>
                     <TouchableOpacity onPress={Close}>
                         <View>

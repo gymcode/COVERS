@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
 import {  ScrollView } from 'react-native-gesture-handler';
 import {Symptoms} from '../../Data/data'
+import {vitalContext} from '../../App'
 
 const Card = ({ value, sign, handleSelect, idOfSymptom, valueData, selectStatus }) => {
     return (
@@ -27,6 +28,7 @@ export default function LogSymptoms(){
     const [throat, setThroat] = useState({});
     const [cough, setCough] = useState({});
     const [headache, setHeadache] = useState({});
+    const {vitalSymptoms, reportSymptom} = React.useContext(vitalContext)
 
     function handleSelect(valueData, idOfSymptom) {
         if (idOfSymptom === 1 ) {
@@ -56,9 +58,28 @@ export default function LogSymptoms(){
         }
      
       }
+     
+
+      function submit() {
+        setLoad(true)
+        
+        setTimeout(() => {
+          const newSymptoms = { 
+            fever,
+            aches,
+            breath,
+            throat,
+            cough,
+            headache,
+          };
+          reportSymptom(newSymptoms);
+          
+        },2000)
+      }
+    
       
     return(
-        <View>
+          <View>
            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ paddingTop: 10 }}>
                 {Symptoms.map(symptom => (
@@ -85,8 +106,21 @@ export default function LogSymptoms(){
                     </View>
                 ))}
                 </View>
-            </ScrollView>
-        </View>
+           
+            {/* Button */}
+          <TouchableOpacity onPress={()=>{submit()}} style={styles.button}>
+            {load ? (
+              <ActivityIndicator color="black" />
+            ):(
+              <Text style={([styles.description], { color: 'white' })}>
+                Log Vitals
+              </Text>
+            )}
+        
+          </TouchableOpacity>
+          </ScrollView>
+          </View>
+        
     )
 }
 
@@ -99,8 +133,10 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.2,
       paddingHorizontal: 20,
       paddingVertical: 10,
+      marginVertical: 10,
       borderBottomRightRadius: 15,
       borderBottomLeftRadius: 15,
+      
     },
     values: {
       width: 50,

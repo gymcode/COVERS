@@ -8,10 +8,14 @@ import load from '../../../assets/loading/vitals.json'
 
 import Header from '../../../components/header'
 import ContentModal from './contentModal'
+import { vitalContext} from '../../../App'
+import UserSymptoms from '../../../components/vitalComponents/userSymptoms'
 
 
 export default function Vitals(){
   const [modal, setModal] = useState(false)
+  const {vitalSymptoms} = React.useContext(vitalContext)
+  console.log(vitalSymptoms.length)
 
   function CloseModal(){
     setModal(false)
@@ -21,7 +25,11 @@ export default function Vitals(){
           <Header>
               <Text>Vitals</Text>
           </Header>
-          <View style={{justifyContent: "center", alignItems: "center"}}>
+          {
+            vitalSymptoms.length > 0 ?
+            <UserSymptoms/>
+          :
+            <View style={{justifyContent: "center", alignItems: "center"}}>
               <Lottie source={load} autoPlay loop style={{width: 70, height: 140, marginLeft: 25, marginVertical: 15}}/>
 
               <View style={{marginTop: 55, justifyContent: "center", alignItems: "center"}}>
@@ -37,6 +45,8 @@ export default function Vitals(){
 
               <ContentModal Visible={modal} Close={()=>{CloseModal()}}/>
           </View>
+          }
+
         </View>
       )
 }

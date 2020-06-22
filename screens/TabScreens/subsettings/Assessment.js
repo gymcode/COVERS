@@ -30,22 +30,22 @@ export default function Assessment({Visible, Close}){
 
                 <View style={{marginTop: 30}}>
                     <View>
-                        <Text>Getting Started!</Text>
+                        <Text style={{fontSize: 18, fontWeight: "bold"}}>Getting Started!</Text>
                         <Text>
                             {
                             "This tool is intended to help you understand what to do next about COVID-19. You'll answer a few questions about your symptoms, travel and contact you've had with others"
                             }
                         </Text>
                     </View>
-                    <View>
-                        <Text>Getting Started!</Text>
+                    <View style={{marginTop: 25}}>
+                        <Text style={{fontSize: 18, fontWeight: "bold"}}>Note</Text>
                         <Text>
                             {
                             "Recommendations provided by this tool do not constitute medidal advice and should not be used to diagnose or treat medical conditions"
                             }
                         </Text>
                     </View>
-                    <View style={{ marginTop: 1000 * 0.34 }}>
+                    <View style={{ marginTop: 900 * 0.34 }}>
                     <TouchableOpacity style={styles.button}>
                         <Text style={([styles.mainTitle], { color: 'white' })}>
                         Start Assessment...

@@ -7,13 +7,19 @@ export default function Notification ({Visible, Close}){
             <View style={{padding: 20}}>
                 <View style={{flexDirection: "row", justifyContent: 'space-between'}}> 
                     <View>
-                        <Text>Notification</Text>
+                        <Text style={{fontSize: 35, fontWeight: "bold"}}>Notification</Text>
                     </View>
                     <TouchableOpacity onPress={Close}>
                         <View>
                             <Text>close</Text>
                         </View>   
                     </TouchableOpacity>
+                </View>
+
+                <View style={{justifyContent: "center", alignItems: "center", marginTop: 20}}>
+                    <View>
+                        <Text>Opps no messages yet</Text>
+                    </View>
                 </View>
             </View>
         </Modal>
