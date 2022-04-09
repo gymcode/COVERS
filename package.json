@@ -23,7 +23,7 @@
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "lottie-react-native": "^3.4.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "numeral": "^2.0.6",
     "radio-buttons-react-native": "^1.0.4",
     "react": "~16.9.0",
